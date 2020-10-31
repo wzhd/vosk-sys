@@ -26,6 +26,7 @@ fn main() {
         "spk_model.cc",
         "model.cc",
         "vosk_api.cc",
+        "language_model.cc",
     ];
     let vosk_files = vosk_files
         .iter()
