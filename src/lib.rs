@@ -58,6 +58,16 @@ extern "C" {
     ///  last recognizer is released, model will be released too.
     pub fn vosk_spk_model_free(model: *mut VoskSpkModel);
 
+    /// Check if a word can be recognized by the model
+    ///
+    /// returns the word symbol if `word` exists inside the `model`
+    /// or -1 otherwise.
+    /// Reminding that word symbol 0 is for `<epsilon>`
+    pub fn vosk_model_find_word(
+        model: *mut VoskModel,
+        word: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+
     /// Creates the recognizer object
     ///
     ///  The recognizers process the speech and return text using shared model data
@@ -79,10 +89,10 @@ extern "C" {
         sample_rate: f32,
     ) -> *mut VoskRecognizer;
 
-    /// Creates the recognizer object with the grammar
+    /// Creates the recognizer object with the phrase list
     ///
     ///  Sometimes when you want to improve recognition accuracy and when you don't need
-    ///  to recognize large vocabulary you can specify a list of words to recognize. This
+    ///  to recognize large vocabulary you can specify a list of phrases to recognize. This
     ///  will improve recognizer speed and accuracy but might return `[unk]` if user said
     ///  something different.
     ///
@@ -90,7 +100,8 @@ extern "C" {
     ///  Precompiled HCLG graph models are not supported.
     ///
     ///   `sample_rate` The sample rate of the audio you going to feed into the recognizer
-    ///   `grammar` The string with the list of words to recognize, for example "one two three four five [unk]"
+    ///   `grammar` The string with the list of phrases to recognize as JSON array of strings,
+    ///             for example `["one two three four five", "[unk]"]`
     pub fn vosk_recognizer_new_grm(
         model: *mut VoskModel,
         sample_rate: f32,

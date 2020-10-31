@@ -9,9 +9,14 @@ Get the code, which contains instructions and some scripts:
 
 > git clone -b lookahead --single-branch https://github.com/alphacep/kaldi
 
+Note: If you run the command at a different time point, the code could be
+too old or too new to be compatible. You can `checkout` the revision the
+current Rust code is developed for:
+`d39d716e3429742e35dbb7bc02401f7c7b40b83e`.
+
 Head over to the `tools` directory: `cd kaldi/tools`,
 and prepare some dependencies.
- 
+
 Running `make` may just work.
 Read the text file `INSTALL` for more info.
 
@@ -60,4 +65,3 @@ Run `git submodule init` and `git submodule update`
 to get the code.
 
 Now `cargo build` can be run.
-
